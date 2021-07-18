@@ -1,0 +1,115 @@
+.contactPageContainer {
+  display: flex;
+  flex-direction: column;
+  height: inherit;
+  .centerItems {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .contentWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+    img {
+      height: 106px;
+    }
+    .contentDescription {
+      font-weight: bold;
+    }
+  }
+  .backButtonContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 5px;
+    a {
+      text-decoration: none;
+      color: inherit;
+      &:hover,
+      &:focus,
+      &:active {
+        text-decoration: none;
+        color: inherit;
+      }
+    }
+    .backButton {
+      font-size: 40px;
+    }
+  }
+  .developerInfo {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    .developerPicContainer {
+      @extend .centerItems;
+      .MuiAvatar-root {
+        width: 150px;
+        height: 150px;
+      }
+    }
+    .developerDescriptionContainer {
+      @extend .centerItems;
+    }
+    .developerExperienceContainer {
+      @extend .centerItems;
+    }
+    .technologiesContainer {
+      @extend .centerItems;
+      padding-top: 90px;
+      flex-direction: column;
+      .technologiesHeader {
+        font-size: 30px;
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+      .technologiesContent {
+        @extend .centerItems;
+        flex-wrap: wrap;
+      }
+    }
+    .sourceCodeContainer {
+      @extend .centerItems;
+      padding-top: 90px;
+      flex-direction: column;
+      .sourceCodeHeader {
+        font-size: 30px;
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+      .sourceCodeContent {
+        @extend .centerItems;
+        flex-wrap: wrap;
+        .contentWrapper {
+          img {
+            height: 70px;
+          }
+        }
+      }
+    }
+    .contactMeContainer {
+      @extend .centerItems;
+      padding-top: 90px;
+      flex-direction: column;
+      .sourceCodeHeader {
+        font-size: 30px;
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+      .sourceCodeContent {
+        @extend .centerItems;
+        flex-wrap: wrap;
+        .contentWrapper {
+          img {
+            height: 70px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,146 @@
+.homePageContainer {
+  height: inherit;
+  .pageSectionPanel {
+    margin: 0 15% 0;
+    color: white;
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .sectionHeader {
+      margin: 15px 0;
+      font-weight: 700;
+      font-size: 23px;
+      font-style: italic;
+      font-family: cursive;
+    }
+    .sectionParagraph {
+      font-size: 15px;
+      text-align: center;
+      margin: 15px 0;
+      font-family: cursive;
+    }
+    .sectionParagraphFontOverride {
+      font-size: 12px;
+    }
+    .sectionButtons {
+      margin: 15px 0;
+    }
+  }
+  .footerParagraphMessage {
+    margin: 5px 0;
+  }
+  .linkText {
+    text-decoration: underline;
+    cursor: pointer;
+    a {
+      text-decoration: none;
+      color: inherit;
+      &:hover,
+      &:focus,
+      &:active {
+        text-decoration: none;
+        color: inherit;
+      }
+    }
+  }
+  .homePagePanel1 {
+    background-color: #1e69cd;
+    position: sticky;
+    .buttonOverride {
+      background-color: #0000ff54;
+      color: white;
+      padding: 15px 35px;
+      border: 1px solid white;
+    }
+  }
+  .homePagePanel2 {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .carouselContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .slideContainer {
+        border: 1px solid black;
+      }
+    }
+  }
+  .homePagePanel3 {
+    background-color: #1e69cd;
+    ul {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      li {
+        margin: 10px 0;
+      }
+    }
+  }
+  .homePagePanel4 {
+    background-color: white;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: cursive;
+    font-weight: bold;
+    .githubFooterIcon {
+      background: black;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      margin: 10px;
+      border-radius: 30px;
+      border: 1px solid black;
+    }
+  }
+}
+.githubLabelContainer {
+  height: 100px;
+  width: 100px;
+  overflow: hidden;
+  background-color: transparent;
+  position: absolute;
+  left: 0;
+  .githubLabelBackground {
+    width: 0;
+    height: 0;
+    border-top: 100px solid black;
+    border-right: 100px solid transparent;
+    cursor: pointer;
+    .githubIcon {
+      position: absolute;
+      top: 0;
+      width: 50px;
+      height: 50px;
+      transform: rotate(312deg);
+      padding: 5px;
+    }
+  }
+}
+.contactLinkContainer {
+  color: white;
+  position: absolute;
+  right: 0;
+  margin: 5px 10px 5px 5px;
+  font-weight: bold;
+  font-family: -webkit-pictograph;
+  text-decoration: underline;
+  font-size: 17px;
+  cursor: pointer;
+  a {
+    text-decoration: none;
+    color: inherit;
+    &:hover,
+    &:focus,
+    &:active {
+      text-decoration: none;
+      color: inherit;
+    }
+  }
+}

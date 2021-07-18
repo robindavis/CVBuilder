@@ -1,0 +1,55 @@
+.loginSignupModalWrapper {
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  height: inherit;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .loginSignupModalContainer {
+    position: relative;
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+    .crossIcon {
+      position: absolute;
+      top: 0;
+      right: 0;
+      color: red;
+      background-color: white;
+      cursor: pointer;
+    }
+    .loginSignupModal {
+      background-color: white;
+      border-radius: 5px;
+      padding: 12px;
+      border: 1px solid black;
+      .MuiTabs-root {
+        background-color: #0000ff2e;
+      }
+      .loginPageContainer {
+        background-color: white;
+        margin: 10px;
+        .actionContainer {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin: 4px;
+        }
+      }
+      .signupPageContainer {
+        @extend .loginPageContainer;
+      }
+    }
+  }
+}
+.loginSignupModalOveraly {
+  position: absolute;
+  background-color: black;
+  z-index: 1;
+  height: inherit;
+  top: 0;
+  width: 100%;
+  opacity: 0.85;
+}
