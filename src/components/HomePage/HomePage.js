@@ -2,22 +2,27 @@
 import Button from "@material-ui/core/Button";
 import { useState } from "react";
 import { Carousel } from "react-responsive-carousel";
-import { Link } from "react-router-dom";
-import Tooltip from "@material-ui/core/Tooltip";
+import { Link, useHistory } from "react-router-dom";
+import { connect } from "react-redux";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 // User Imports
 import "./HomePage.scss";
 import { windowHeight } from "../../utils/Dimensions/Dimensions";
+import { updateUserLoginStatus } from "../../redux/UserLoginStatus/UserLoginStatusAction";
+import { updateGlobalOperationOverlayStatus } from "../../redux/GlobalOperation/GlobalOperationAction";
 import LoginSignupModal from "../LoginSignupModal/LoginSignupModal";
+import { updateGlobalOperationNotificationStatus } from "../../redux/GlobalOperation/GlobalOperationAction";
+import { firebaseSignout } from "../../firebase/init";
 import GithubIcon from "../../resources/HomePage/GithubIcon.png";
 import SlideImage1 from "../../resources/HomePage/SlideImage1.jpg";
 import SlideImage2 from "../../resources/HomePage/SlideImage2.jpg";
 import SlideImage3 from "../../resources/HomePage/SlideImage3.jpg";
 
-function HomePage() {
+function HomePage(props) {
   // Login Signup Modal Flag
   const [loginSignupModalStatus, setLoginSignupModalStatus] = useState(false);
+  const history = useHistory();
 
   // TODO
   // For Font size override in mobile
@@ -28,11 +33,11 @@ function HomePage() {
     return (
       <div className="githubLabelContainer">
         <div className="githubLabelBackground">
-          <Tooltip title="Github">
+          <div title="Github">
             <a href="https://github.com/robindavis/Resume" target="_blank">
               <img src={GithubIcon} className="githubIcon" />
             </a>
-          </Tooltip>
+          </div>
         </div>
       </div>
     );
@@ -47,10 +52,61 @@ function HomePage() {
     );
   };
 
+  // User Signout Callback
+  const handleUserSignout = (event) => {
+    event.stopPropagation();
+    props.setGlobalOverlayStatus(true);
+    firebaseSignout()
+      .then(() => {
+        props.setGlobalNotificationStatus({
+          isOpen: true,
+          severity: "success",
+          message: "Logged out Successfully!!",
+        });
+        props.setGlobalOverlayStatus(false);
+        props.setUserLoginStatus(false);
+      })
+      .catch((error) => {
+        props.setGlobalNotificationStatus({
+          isOpen: false,
+          severity: "error",
+          message: error.message,
+        });
+        props.setGlobalOverlayStatus(false);
+      });
+  };
+  // Contact Link
+  const SignoutLink = () => {
+    return (
+      <div className="signoutLinkContainer">
+        <div onClick={handleUserSignout}>Signout</div>
+      </div>
+    );
+  };
+
+  // Handle Create CV Button Click
+  const handleCreateCVButtonClick = () => {
+    if (props.isUserLoggedIn) {
+      console.log("User is already logged in");
+      // User is already logged in
+      history.push("/CVBuilderPage");
+    } else {
+      console.log("User is not logged in");
+      // User is not logged in
+      setLoginSignupModalStatus(true);
+    }
+  };
+
+  const handleLoggedInSuccess = () => {
+    setLoginSignupModalStatus(false);
+    history.push("/CVBuilderPage");
+  };
+
   return (
     <div className="homePageContainer">
       <div className="homePagePanel1" style={{ height: windowHeight }}>
         <GithubLabel />
+        {props.isUserLoggedIn && <SignoutLink />}
         <ContactLink />
         <div className="pageSectionPanel">
           <div className="sectionHeader">Welcome to CV Builder</div>
@@ -71,7 +127,7 @@ function HomePage() {
               size="large"
               className="buttonOverride"
               color="primary"
-              onClick={() => setLoginSignupModalStatus(!loginSignupModalStatus)}
+              onClick={handleCreateCVButtonClick}
             >
               Create CV
             </Button>
@@ -127,19 +183,36 @@ function HomePage() {
         <div className="footerParagraphMessage linkText">
           <Link to="/Contact">Contact Developer</Link>
         </div>
-        <Tooltip title="Github">
+        <div title="Github">
           <a href="https://github.com/robindavis/Resume" target="_blank">
             <img src={GithubIcon} className="githubFooterIcon" />
           </a>
-        </Tooltip>
+        </div>
       </div>
       {loginSignupModalStatus && (
         <LoginSignupModal
           setLoginSignupModalStatus={setLoginSignupModalStatus}
+          handleLoggedInSuccess={handleLoggedInSuccess}
         />
       )}
     </div>
   );
 }
 
-export default HomePage;
+const mapStateToProps = (state) => ({
+  isUserLoggedIn: state.UserLoginStatusReducer.isUserLoggedIn,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setUserLoginStatus: (newStatus) => {
+    dispatch(updateUserLoginStatus(newStatus));
+  },
+  setGlobalOverlayStatus: (newStatus) => {
+    dispatch(updateGlobalOperationOverlayStatus(newStatus));
+  },
+  setGlobalNotificationStatus: (newNotificationInfo) => {
+    dispatch(updateGlobalOperationNotificationStatus(newNotificationInfo));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

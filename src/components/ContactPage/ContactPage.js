@@ -2,7 +2,6 @@
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 import { Link } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
-import Tooltip from "@material-ui/core/Tooltip";
 
 // User Imports
 import DeveloperProfilePic from "../../resources/ContactPage/DeveloperProfilePic.jpg";
@@ -94,46 +93,36 @@ function ContactPage() {
         <div className="sourceCodeContainer">
           <div className="sourceCodeHeader">Source Code</div>
           <div className="sourceCodeContent">
-            <Tooltip title="Github">
-              <div className="contentWrapper">
-                <a href={githubRepoLink} target="_blank">
-                  <img src={GithubBlackLogo} />
-                </a>
-              </div>
-            </Tooltip>
+            <div className="contentWrapper" title="Github">
+              <a href={githubRepoLink} target="_blank">
+                <img src={GithubBlackLogo} />
+              </a>
+            </div>
           </div>
         </div>
         <div className="contactMeContainer">
           <div className="sourceCodeHeader">Contact Me</div>
           <div className="sourceCodeContent">
-            <Tooltip title="Gmail">
-              <div className="contentWrapper">
-                <a href={gmailLink} target="_blank">
-                  <img src={GmailLogo} />
-                </a>
-              </div>
-            </Tooltip>
-            <Tooltip title="LinkedIn">
-              <div className="contentWrapper">
-                <a href={linkedInLink} target="_blank">
-                  <img src={LinkedInLogo} />
-                </a>
-              </div>
-            </Tooltip>
-            <Tooltip title="Facebook">
-              <div className="contentWrapper">
-                <a href={facebookLink} target="_blank">
-                  <img src={FacebookLogo} />
-                </a>
-              </div>
-            </Tooltip>
-            <Tooltip title="Twitter">
-              <div className="contentWrapper">
-                <a href={twitterLink} target="_blank">
-                  <img src={TwitterLogo} />
-                </a>
-              </div>
-            </Tooltip>
+            <div className="contentWrapper" title="Gmail">
+              <a href={gmailLink} target="_blank">
+                <img src={GmailLogo} />
+              </a>
+            </div>
+            <div className="contentWrapper" title="LinkedIn">
+              <a href={linkedInLink} target="_blank">
+                <img src={LinkedInLogo} />
+              </a>
+            </div>
+            <div className="contentWrapper" title="Facebook">
+              <a href={facebookLink} target="_blank">
+                <img src={FacebookLogo} />
+              </a>
+            </div>
+            <div className="contentWrapper" title="Twitter">
+              <a href={twitterLink} target="_blank">
+                <img src={TwitterLogo} />
+              </a>
+            </div>
           </div>
         </div>
       </div>

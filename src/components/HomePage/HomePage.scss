@@ -144,3 +144,7 @@
     }
   }
 }
+.signoutLinkContainer {
+  @extend .contactLinkContainer;
+  margin-right: 85px;
+}

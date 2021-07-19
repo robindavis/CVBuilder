@@ -1,4 +1,20 @@
 .rootAppContainer {
   height: inherit;
   overflow-y: auto;
+  .universalOverlayContainer {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: white;
+    z-index: 5;
+    opacity: 0.8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      height: 50px;
+      width: 50px;
+    }
+  }
 }
