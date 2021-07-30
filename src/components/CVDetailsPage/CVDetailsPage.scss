@@ -1,0 +1,81 @@
+.cvDetailsPageContainer {
+  border: 1px solid black;
+  flex-grow: 1;
+  background-color: dimgrey;
+  overflow-y: auto;
+  .cvDetailCardContainer {
+    margin: 25px;
+    .cvDetailCardHeader {
+      display: flex;
+      .cvDetailCardSectionName {
+        flex-grow: 1;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+      }
+    }
+    .addGroupButton {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .MuiButton-root {
+        background-color: green;
+      }
+    }
+    .groupsContainer {
+      display: flex;
+      flex-direction: column;
+      .groupContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid blue;
+        margin: 15px;
+        padding: 10px;
+        flex-direction: column;
+        .blockContainer {
+          display: flex;
+          flex-direction: column;
+          margin: 10px;
+          width: 100%;
+          .listChildren {
+            display: flex;
+            margin: 10px 0;
+            .MuiButton-root {
+              margin: 11px;
+              background-color: cornflowerblue;
+              border-radius: 26px;
+              &.hideMe {
+                visibility: hidden;
+              }
+            }
+          }
+          .headerChildren {
+            display: flex;
+            .leftHeader {
+              margin-right: 5px;
+            }
+            .rightHeader {
+              margin-left: 5px;
+            }
+          }
+          .tabularChildren {
+            display: flex;
+            .leftTabular {
+              margin-right: 5px;
+            }
+            .rightTabular {
+              margin-left: 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .addSectionButtonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+  }
+}

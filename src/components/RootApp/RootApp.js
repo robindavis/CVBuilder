@@ -61,6 +61,11 @@ function RootApp(props) {
       )}
       <Router>
         <Switch>
+          {/* Start */}
+          {/* <Route path="/" exact>
+            <CVBuilderPage />
+          </Route> */}
+          {/* End */}
           <Route path="/Contact" exact>
             <ContactPage />
           </Route>

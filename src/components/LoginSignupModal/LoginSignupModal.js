@@ -22,7 +22,6 @@ function LoginSignupModal(props) {
   // Tab Change Event Callback
   const handleTabChange = (event, newValue) => {
     setTabCurrentIndex(newValue);
-    handleAlertClose();
   };
 
   // Modal Overaly Click Event
