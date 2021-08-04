@@ -8,7 +8,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 // User Imports
 import "./HomePage.scss";
-import { windowHeight } from "../../utils/Dimensions/Dimensions";
+import { windowHeight, windowWidth } from "../../utils/Dimensions/Dimensions";
 import { updateUserLoginStatus } from "../../redux/UserLoginStatus/UserLoginStatusAction";
 import { updateGlobalOperationOverlayStatus } from "../../redux/GlobalOperation/GlobalOperationAction";
 import { updateGlobalOperationNotificationStatus } from "../../redux/GlobalOperation/GlobalOperationAction";
@@ -19,9 +19,12 @@ import {
 import LoginSignupModal from "../LoginSignupModal/LoginSignupModal";
 import { firebaseSignout } from "../../firebase/init";
 import GithubIcon from "../../resources/HomePage/GithubIcon.png";
-import SlideImage1 from "../../resources/HomePage/SlideImage1.jpg";
-import SlideImage2 from "../../resources/HomePage/SlideImage2.jpg";
-import SlideImage3 from "../../resources/HomePage/SlideImage3.jpg";
+import SlideImage1 from "../../resources/HomePage/SlideImage1.png";
+import SlideImage2 from "../../resources/HomePage/SlideImage2.png";
+import SlideImage3 from "../../resources/HomePage/SlideImage3.png";
+import MobileSlideImage1 from "../../resources/HomePage/MobileSlideImage1.png";
+import MobileSlideImage2 from "../../resources/HomePage/MobileSlideImage2.png";
+import MobileSlideImage3 from "../../resources/HomePage/MobileSlideImage3.png";
 
 function HomePage(props) {
   // Login Signup Modal Flag
@@ -123,16 +126,13 @@ function HomePage(props) {
         <div className="pageSectionPanel">
           <div className="sectionHeader">Welcome to CV Builder</div>
           <div className={`sectionParagraph ${fontSizeOverrideBasedOnHeight}`}>
-            CVs are used to make a favorable impression on a prospective
-            employer. Your CV is often the first impression a potential employer
-            has of you. For this reason, it is often referred to as one of the
-            most crucial steps taken during a job search.
-          </div>
-          <div className={`sectionParagraph ${fontSizeOverrideBasedOnHeight}`}>
-            An electronic CV is a plain text (ASCII), PDF or HTML document that
-            provides an employer with information regarding a job candidate's
-            professional experience, education and job qualifications and is
-            meant to be read by a computer program instead of by a human being.
+            A curriculum vitae, often abbreviated as CV, is a document that job
+            applicants use to showcase their academic and professional
+            accomplishments. It is used to apply for positions within areas
+            where a person’s specific knowledge or expertise is required. A
+            curriculum vitae is usually longer than a resume and must include
+            the information that the recruiter needs to verify the skills,
+            experience, and educational qualifications of an applicant.
           </div>
           <div className="sectionButtons">
             <Button
@@ -146,7 +146,10 @@ function HomePage(props) {
           </div>
         </div>
       </div>
-      <div className="homePagePanel2" style={{ height: windowHeight }}>
+      <div
+        className="homePagePanel2"
+        style={{ height: "430px", margin: "10px 0" }}
+      >
         <Carousel
           autoPlay={true}
           infiniteLoop={true}
@@ -157,19 +160,19 @@ function HomePage(props) {
           className="carouselContainer"
         >
           <img
-            src={SlideImage1}
-            style={{ height: windowHeight * 0.9 }}
+            src={windowWidth < 650 ? MobileSlideImage1 : SlideImage1}
             className="slideContainer"
+            style={{ height: "430px" }}
           />
           <img
-            src={SlideImage2}
-            style={{ height: windowHeight * 0.9 }}
+            src={windowWidth < 650 ? MobileSlideImage2 : SlideImage2}
             className="slideContainer"
+            style={{ height: "430px" }}
           />
           <img
-            src={SlideImage3}
-            style={{ height: windowHeight * 0.9 }}
+            src={windowWidth < 650 ? MobileSlideImage3 : SlideImage3}
             className="slideContainer"
+            style={{ height: "430px" }}
           />
         </Carousel>
       </div>
@@ -178,12 +181,18 @@ function HomePage(props) {
           <div className="sectionHeader">Features:</div>
           <div className={`sectionParagraph ${fontSizeOverrideBasedOnHeight}`}>
             <ul>
-              <li>CV format can be easily changed</li>
-              <li>CV fields can be edited and changed easily</li>
               <li>
-                For new formats being released, existing CV fields info can be
-                used
+                Enter details once and generate multiple templates based on the
+                info entered.
               </li>
+              <li>All the information is securely saved on your account.</li>
+              <li>Any time any where, you can access and print your CV.</li>
+              <li>
+                New templates are added, so you will be able to generate a
+                modern & stylish CV without changing any of the information
+                already saved.
+              </li>
+              <li>Preview of the CV can be seen, before printing the CV.</li>
             </ul>
           </div>
         </div>

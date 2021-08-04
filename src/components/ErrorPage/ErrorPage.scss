@@ -1,3 +1,29 @@
 .erroPageContainer {
-  background-color: cyan;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: gray;
+  .errorMessageIcon {
+    svg {
+      font-size: 169px;
+      font-weight: normal;
+    }
+  }
+  .errorMessage {
+    font-size: 23px;
+    margin: 5px 0;
+    text-align: center;
+    .MuiButton-root {
+      background-color: #1e69cd;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .boldText {
+    font-size: 45px;
+    font-weight: bold;
+  }
 }

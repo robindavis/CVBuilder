@@ -1,12 +1,12 @@
 .cvDetailsPageContainer {
-  border: 1px solid black;
+  // border: 1px solid black;
   flex-grow: 1;
   background-color: dimgrey;
   overflow-y: auto;
   .cvDetailCardContainer {
     margin: 10px auto;
     max-width: 822px;
-    width: calc(100% - 50px);
+    width: calc(100% - 20px);
     .cvDetailCardHeader {
       display: flex;
       .cvDetailCardSectionName {
@@ -14,6 +14,12 @@
         display: flex;
         justify-content: flex-start;
         align-items: center;
+      }
+      .cvDetailsCardControls {
+        display: flex;
+        .MuiIconButton-root {
+          padding: 0 5px;
+        }
       }
     }
     .addGroupButton {

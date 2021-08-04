@@ -312,7 +312,7 @@ const CreateCVSection = (props) => {
             "Name"
           )}
         </div>
-        <div>
+        <div className="cvDetailsCardControls">
           {props.cardID > 0 && props.cardID !== props.userCVDetails.length - 1 && (
             <IconButton onClick={handleSectionMoveDownClick}>
               <ArrowDownwardIcon />

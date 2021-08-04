@@ -75,17 +75,16 @@
     display: flex;
     justify-content: center;
     background-color: gray;
-    padding-top: 10px;
-    padding-bottom: 10px;
     flex-grow: 1;
     .template1Wrapper {
       background-color: white;
       overflow-y: auto;
       margin: 0;
-      padding: 0;
       flex-grow: 1;
       max-width: 822px;
       padding: 10px;
+      display: flex;
+      flex-direction: column;
       .userName {
         border-bottom: 3px solid #000;
         padding-bottom: 30px;
@@ -94,10 +93,12 @@
         font-size: 26px;
         padding: 0 0 23px;
         font-family: "Helvetica Neue", Helvetica, Arial;
+        min-width: 600px;
       }
       .section {
         margin-bottom: 20px;
         display: flex;
+        min-width: 600px;
         .leftSection {
           flex-basis: 17.5%;
           padding: 0 22px 15px 0;

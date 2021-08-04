@@ -20,7 +20,8 @@
     cursor: pointer;
     box-shadow: 5px 5px 10px 1px black;
     user-select: none;
-    font-size: 22px;
+    font-size: 19px;
+    text-align: center;
     &:active {
       background-color: lightgray;
       box-shadow: none;
