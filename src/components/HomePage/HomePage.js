@@ -45,7 +45,7 @@ function HomePage(props) {
       <div className="githubLabelContainer">
         <div className="githubLabelBackground">
           <div title="Github">
-            <a href="https://github.com/robindavis/Resume" target="_blank">
+            <a href="https://github.com/robindavis/CVBuilder" target="_blank">
               <img src={GithubIcon} className="githubIcon" />
             </a>
           </div>
@@ -205,7 +205,7 @@ function HomePage(props) {
           <Link to="/Contact">Contact Developer</Link>
         </div>
         <div title="Github">
-          <a href="https://github.com/robindavis/Resume" target="_blank">
+          <a href="https://github.com/robindavis/CVBuilder" target="_blank">
             <img src={GithubIcon} className="githubFooterIcon" />
           </a>
         </div>
