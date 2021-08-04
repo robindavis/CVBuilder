@@ -1,6 +1,6 @@
 // Library Imports
 import Button from "@material-ui/core/Button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Carousel } from "react-responsive-carousel";
 import { Link, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
@@ -12,6 +12,10 @@ import { windowHeight } from "../../utils/Dimensions/Dimensions";
 import { updateUserLoginStatus } from "../../redux/UserLoginStatus/UserLoginStatusAction";
 import { updateGlobalOperationOverlayStatus } from "../../redux/GlobalOperation/GlobalOperationAction";
 import { updateGlobalOperationNotificationStatus } from "../../redux/GlobalOperation/GlobalOperationAction";
+import {
+  updateServerCVDetails,
+  updateCVDetails,
+} from "../../redux/CVDetails/CVDetailsAction";
 import LoginSignupModal from "../LoginSignupModal/LoginSignupModal";
 import { firebaseSignout } from "../../firebase/init";
 import GithubIcon from "../../resources/HomePage/GithubIcon.png";
@@ -23,6 +27,10 @@ function HomePage(props) {
   // Login Signup Modal Flag
   const [loginSignupModalStatus, setLoginSignupModalStatus] = useState(false);
   const history = useHistory();
+
+  useEffect(() => {
+    localStorage.removeItem("SavedCVBuilderPage");
+  }, []);
 
   // TODO
   // For Font size override in mobile
@@ -65,6 +73,8 @@ function HomePage(props) {
         });
         props.setGlobalOverlayStatus(false);
         props.setUserLoginStatus(false);
+        props.setCVDetails([]);
+        props.setServerCVDetails([]);
       })
       .catch((error) => {
         props.setGlobalNotificationStatus({
@@ -73,6 +83,8 @@ function HomePage(props) {
           message: error.message,
         });
         props.setGlobalOverlayStatus(false);
+        props.setCVDetails([]);
+        props.setServerCVDetails([]);
       });
   };
   // Contact Link
@@ -212,6 +224,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   setGlobalNotificationStatus: (newNotificationInfo) => {
     dispatch(updateGlobalOperationNotificationStatus(newNotificationInfo));
+  },
+  setServerCVDetails: (newServerCVDetails) => {
+    dispatch(updateServerCVDetails(newServerCVDetails));
+  },
+  setCVDetails: (newCVDetails) => {
+    dispatch(updateCVDetails(newCVDetails));
   },
 });
 

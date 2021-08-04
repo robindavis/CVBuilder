@@ -6,6 +6,7 @@ import createSagaMiddleware from "redux-saga";
 // User Imports
 import UserLoginStatusReducer from "./UserLoginStatus/UserLoginStatusReducer";
 import GlobalOperationReducer from "./GlobalOperation/GlobalOperationReducer";
+import CVDetailsReducer from "./CVDetails/CVDetailsReducer";
 import rootSagas from "../redux-saga/rootSagas";
 
 // Initializing logger
@@ -14,7 +15,11 @@ const logger = createLogger();
 const sagaMiddleware = createSagaMiddleware();
 // Root store instance
 const store = createStore(
-  combineReducers({ UserLoginStatusReducer, GlobalOperationReducer }),
+  combineReducers({
+    UserLoginStatusReducer,
+    GlobalOperationReducer,
+    CVDetailsReducer,
+  }),
   applyMiddleware(logger, sagaMiddleware)
 );
 

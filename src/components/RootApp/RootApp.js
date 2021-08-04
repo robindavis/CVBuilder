@@ -13,12 +13,18 @@ import MuiAlert from "@material-ui/lab/Alert";
 // User Imports
 import "./RootApp.scss";
 import { updateGlobalOperationNotificationStatus } from "../../redux/GlobalOperation/GlobalOperationAction";
+import { updateUserLoginStatus } from "../../redux/UserLoginStatus/UserLoginStatusAction";
+import { updateGlobalOperationOverlayStatus } from "../../redux/GlobalOperation/GlobalOperationAction";
 import LoaderImage from "../../resources/LoginSignupPage/LoaderImage.jpg";
 import HomePage from "../HomePage/HomePage";
 import ErrorPage from "../ErrorPage/ErrorPage";
 import ContactPage from "../ContactPage/ContactPage";
 import CVBuilderPage from "../CVBuilderPage/CVBuilderPage";
-import { firebaseInit } from "../../firebase/init";
+import Template1 from "../CVTemplate/Template1";
+import {
+  firebaseInit,
+  firebaseCheckIfAlreadyLoggedIn,
+} from "../../firebase/init";
 
 function RootApp(props) {
   // Global Variables
@@ -29,7 +35,17 @@ function RootApp(props) {
   };
 
   useEffect(() => {
+    props.setGlobalOverlayStatus(true);
     firebaseInit();
+    firebaseCheckIfAlreadyLoggedIn()
+      .then(() => {
+        props.setGlobalOverlayStatus(false);
+        props.setUserLoginStatus(true);
+      })
+      .catch(() => {
+        props.setGlobalOverlayStatus(false);
+        props.setUserLoginStatus(false);
+      });
   }, []);
 
   return (
@@ -69,6 +85,9 @@ function RootApp(props) {
           <Route path="/Contact" exact>
             <ContactPage />
           </Route>
+          <Route path="/Template1" exact>
+            {props.isUserLoggedIn ? <Template1 /> : <Redirect to="/" />}
+          </Route>
           <Route path="/CVBuilderPage" exact>
             {props.isUserLoggedIn ? <CVBuilderPage /> : <Redirect to="/" />}
           </Route>
@@ -95,6 +114,12 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   setGlobalNotificationStatus: (newNotificationInfo) => {
     dispatch(updateGlobalOperationNotificationStatus(newNotificationInfo));
+  },
+  setUserLoginStatus: (newStatus) => {
+    dispatch(updateUserLoginStatus(newStatus));
+  },
+  setGlobalOverlayStatus: (newStatus) => {
+    dispatch(updateGlobalOperationOverlayStatus(newStatus));
   },
 });
 

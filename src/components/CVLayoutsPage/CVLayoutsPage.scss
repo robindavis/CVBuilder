@@ -1,4 +1,32 @@
 .cvLayoutsPageContainer {
-  border: 1px solid black;
   flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: gray;
+  a {
+    text-decoration: none;
+    color: black;
+  }
+  .cardContainer {
+    display: flex;
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    cursor: pointer;
+    box-shadow: 5px 5px 10px 1px black;
+    user-select: none;
+    font-size: 22px;
+    &:active {
+      background-color: lightgray;
+      box-shadow: none;
+    }
+  }
+  &.hideThisTab {
+    display: none;
+  }
 }

@@ -4,7 +4,7 @@ import CardContent from "@material-ui/core/CardContent";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import IconButton from "@material-ui/core/IconButton";
 import Collapse from "@material-ui/core/Collapse";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
@@ -22,6 +22,10 @@ import "./CVDetailsPage.scss";
 import { updateGlobalOperationNotificationStatus } from "../../redux/GlobalOperation/GlobalOperationAction";
 import { saveUserCVInfo, fetchUserCVInfo } from "../../firebase/init";
 import { updateGlobalOperationOverlayStatus } from "../../redux/GlobalOperation/GlobalOperationAction";
+import {
+  updateCVDetails,
+  updateServerCVDetails,
+} from "../../redux/CVDetails/CVDetailsAction";
 
 // Component for creating sections
 const CreateCVSection = (props) => {
@@ -299,13 +303,13 @@ const CreateCVSection = (props) => {
         <div className="cvDetailCardSectionName">
           {props.isSectionNameEditable ? (
             <TextField
-              label="Section"
+              label={`Section ${props.cardID}`}
               variant="outlined"
               value={props.sectionName}
               onChange={handleSectionNameChange}
             />
           ) : (
-            props.sectionName
+            "Name"
           )}
         </div>
         <div>
@@ -332,9 +336,14 @@ const CreateCVSection = (props) => {
       <Collapse in={cardExpandStatus} timeout="auto">
         <CardContent>
           {props.contentType === "nameContent" && (
-            <TextField label="Your Name" variant="outlined" />
+            <TextField
+              label="Your Name"
+              variant="outlined"
+              value={props.sectionName}
+              onChange={handleSectionNameChange}
+            />
           )}
-          {props.groups.length > 0 && (
+          {props.groups && props.groups.length > 0 && (
             <div className="groupsContainer">
               {props.groups.map((groupInfo, groupIndex) => {
                 return (
@@ -590,17 +599,66 @@ function CVDetailsPage(props) {
       groups: [],
     },
   ]);
+  const componentUserCVDetails = useRef();
+
   useEffect(() => {
-    console.log(userCVDetails);
+    // console.log(userCVDetails);
+    // props.setCVDetails(userCVDetails);
+    componentUserCVDetails.current = userCVDetails;
   }, [userCVDetails]);
 
   useEffect(() => {
-    // For fetching the details and saving it on firebase db
-    getUserData().then((res) => {
-      if (res && res.length) {
-        setUserCVDetails(res);
-      }
-    });
+    if (props.shouldHideThisTab) {
+      props.setCVDetails(userCVDetails);
+    }
+  }, [props.shouldHideThisTab]);
+
+  useEffect(() => {
+    // Checking if there is some changed values as compared between redux store vs firebase database
+    if (
+      props.shouldHideThisTab &&
+      JSON.stringify(props.cvDetails) !== JSON.stringify(props.serverCVDetails)
+    ) {
+      props.setServerCVDetails(props.cvDetails);
+      saveUserData(props.cvDetails);
+    }
+  }, [props.cvDetails, props.shouldHideThisTab]);
+
+  useEffect(() => {
+    // console.log("christmas", props.cvDetails);
+    if (props.cvDetails.length) {
+      // Redux does contain any data
+      setUserCVDetails(props.cvDetails);
+    } else {
+      // Redux does not contain any data
+      // For fetching the details and saving it on firebase db
+      getUserData().then((res) => {
+        if (res && res.length) {
+          // Fix for empty sections, empty groups
+          // Reason: Firebase does not allow to store empty array in the database
+          res.forEach((sectionInfo, sectionIndex) => {
+            if (!sectionInfo.groups) {
+              res[sectionIndex].groups = [];
+            } else {
+              // for (let groupIndex in res[sectionIndex].groups) {
+              //   if (!res[sectionIndex].groups[groupIndex]) {
+              //     res[sectionIndex].groups[groupIndex];
+              //   }
+              // }
+              res[sectionIndex].groups = res[sectionIndex].groups.filter(
+                (groupInfo) => groupInfo !== undefined
+              );
+            }
+          });
+          setUserCVDetails(res);
+          props.setCVDetails(res);
+          props.setServerCVDetails(res);
+        }
+      });
+    }
+    return (() => {
+      props.setCVDetails(componentUserCVDetails.current);
+    }).bind(this);
   }, []);
 
   // Utility function for getting the user data
@@ -647,6 +705,8 @@ function CVDetailsPage(props) {
   // Callback for save button click
   const handleCVInfoSave = () => {
     saveUserData(userCVDetails);
+    props.setCVDetails(userCVDetails);
+    props.setServerCVDetails(userCVDetails);
   };
 
   // Callback for add Section button
@@ -664,7 +724,13 @@ function CVDetailsPage(props) {
   };
 
   return (
-    <div className="cvDetailsPageContainer">
+    <div
+      className={
+        props.shouldHideThisTab
+          ? "hideThisTab cvDetailsPageContainer"
+          : "cvDetailsPageContainer"
+      }
+    >
       {userCVDetails.map((userCVDetail, userCVDetailIndex) => (
         <CreateCVSection
           key={`createCVSection${userCVDetailIndex}`}
@@ -690,6 +756,7 @@ function CVDetailsPage(props) {
           size="small"
           variant="contained"
           color="primary"
+          className="saveButton"
           onClick={handleCVInfoSave}
         >
           <SaveIcon /> Save
@@ -699,6 +766,11 @@ function CVDetailsPage(props) {
   );
 }
 
+const mapStateToProps = (state) => ({
+  cvDetails: state.CVDetailsReducer.cvDetails,
+  serverCVDetails: state.CVDetailsReducer.serverCVDetails,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   setGlobalNotificationStatus: (newNotificationInfo) => {
     dispatch(updateGlobalOperationNotificationStatus(newNotificationInfo));
@@ -706,6 +778,12 @@ const mapDispatchToProps = (dispatch) => ({
   setGlobalOverlayStatus: (newStatus) => {
     dispatch(updateGlobalOperationOverlayStatus(newStatus));
   },
+  setCVDetails: (newCVDetails) => {
+    dispatch(updateCVDetails(newCVDetails));
+  },
+  setServerCVDetails: (newServerCVDetails) => {
+    dispatch(updateServerCVDetails(newServerCVDetails));
+  },
 });
 
-export default connect(null, mapDispatchToProps)(CVDetailsPage);
+export default connect(mapStateToProps, mapDispatchToProps)(CVDetailsPage);

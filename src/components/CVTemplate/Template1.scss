@@ -1,0 +1,189 @@
+@media print {
+  html,
+  body {
+    margin: 0;
+  }
+  .headerContainer {
+    display: none !important;
+  }
+  .printActionContainer {
+    display: none !important;
+  }
+  .templateContainer {
+    padding: 0 !important;
+  }
+}
+
+.template1Container {
+  display: flex;
+  flex-direction: column;
+  height: inherit;
+  .headerContainer {
+    background-color: #1e69cd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    a {
+      text-decoration: none;
+      color: inherit;
+      &:hover,
+      &:focus,
+      &:active {
+        text-decoration: none;
+        color: inherit;
+      }
+    }
+    .backButton {
+      font-size: 40px;
+    }
+  }
+  .userActionContainer {
+    display: flex;
+    .signoutLinkContainer {
+      color: white;
+      font-weight: bold;
+      font-family: -webkit-pictograph;
+      text-decoration: underline;
+      font-size: 17px;
+      cursor: pointer;
+      a {
+        text-decoration: none;
+        color: inherit;
+        &:hover,
+        &:focus,
+        &:active {
+          text-decoration: none;
+          color: inherit;
+        }
+      }
+    }
+  }
+  .printActionContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    background-color: #1e69cd69;
+    .saveButton {
+      background-color: green;
+      margin-left: 20px;
+    }
+  }
+  .templateContainer {
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    background-color: gray;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    flex-grow: 1;
+    .template1Wrapper {
+      background-color: white;
+      overflow-y: auto;
+      margin: 0;
+      padding: 0;
+      flex-grow: 1;
+      max-width: 822px;
+      padding: 10px;
+      .userName {
+        border-bottom: 3px solid #000;
+        padding-bottom: 30px;
+        margin: 0px 0 22px 0;
+        font-weight: bold;
+        font-size: 26px;
+        padding: 0 0 23px;
+        font-family: "Helvetica Neue", Helvetica, Arial;
+      }
+      .section {
+        margin-bottom: 20px;
+        display: flex;
+        .leftSection {
+          flex-basis: 17.5%;
+          padding: 0 22px 15px 0;
+          min-width: 141px;
+          .sectionName {
+            background: #000;
+            text-transform: uppercase;
+            font-size: 10px;
+            font-weight: bold;
+            word-wrap: break-word;
+            color: #fff;
+            padding: 4px 6px;
+            font-family: "Helvetica Neue", Helvetica, Arial;
+          }
+        }
+        .rightSection {
+          flex-grow: 1;
+          .group {
+            margin-bottom: 20px;
+            .normalContent {
+              font-family: "Helvetica Neue", Helvetica, Arial;
+              line-height: 18px;
+              font-size: 12px;
+              color: #222;
+            }
+            .listContent {
+              ul {
+                margin: 0;
+                padding: 0 0 0 10px;
+                list-style-type: square;
+                font-family: "Helvetica Neue", Helvetica, Arial;
+                line-height: 18px;
+                font-size: 12px;
+                color: #222;
+              }
+            }
+            .headerContent {
+              display: flex;
+              .leftHeader {
+                flex-grow: 1;
+                font-size: 15.6px;
+                font-weight: bold;
+                font-family: "Helvetica Neue", Helvetica, Arial;
+                line-height: 18px;
+                padding: 0;
+                margin: 0;
+                color: #222;
+              }
+              .rightHeader {
+                font-size: 15.6px;
+                font-weight: bold;
+                font-family: "Helvetica Neue", Helvetica, Arial;
+                line-height: 18px;
+                padding: 0;
+                margin: 0;
+                color: #222;
+              }
+            }
+            .tabularContent {
+              display: flex;
+              .tabularContentTitle {
+                font-family: "Helvetica Neue", Helvetica, Arial;
+                line-height: 18px;
+                font-size: 13.2px;
+                color: #222;
+                cursor: default;
+                font-weight: bold;
+                padding-right: 10px;
+              }
+              .tabularContentText {
+                font-family: "Helvetica Neue", Helvetica, Arial;
+                line-height: 18px;
+                font-size: 12px;
+                color: #222;
+              }
+              .leftTabularContent {
+                flex-grow: 1;
+                display: flex;
+              }
+              .rightTabularContent {
+                display: flex;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

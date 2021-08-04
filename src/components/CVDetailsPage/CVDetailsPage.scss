@@ -4,7 +4,9 @@
   background-color: dimgrey;
   overflow-y: auto;
   .cvDetailCardContainer {
-    margin: 25px;
+    margin: 10px auto;
+    max-width: 822px;
+    width: calc(100% - 50px);
     .cvDetailCardHeader {
       display: flex;
       .cvDetailCardSectionName {
@@ -77,5 +79,12 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 50px;
+    .saveButton {
+      background-color: green;
+      margin-left: 20px;
+    }
+  }
+  &.hideThisTab {
+    display: none;
   }
 }
