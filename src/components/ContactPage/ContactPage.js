@@ -23,7 +23,7 @@ function ContactPage() {
   // Global Variables
   const startingJobDate = "7 Nov 2017";
   // TODO: Need to update following links
-  const githubRepoLink = "https://github.com/robindavis/NewsApp";
+  const githubRepoLink = "https://github.com/robindavis/";
   const gmailLink =
     "https://mail.google.com/mail/?view=cm&fs=1&to=robin.dvs007@gmail.com";
   const linkedInLink = "https://www.linkedin.com/in/robin-davis-6b4631131";
