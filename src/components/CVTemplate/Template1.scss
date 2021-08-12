@@ -11,6 +11,15 @@
   }
   .templateContainer {
     padding: 0 !important;
+    overflow-y: unset !important;
+  }
+
+  .rootAppContainer {
+    overflow-y: unset !important;
+  }
+
+  .template1Wrapper {
+    overflow-y: unset !important;
   }
 }
 
